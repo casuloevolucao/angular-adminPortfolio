@@ -1,7 +1,6 @@
 export class Usuario{
-
-    constructor(
         
+        constructor(
         public nomeCompleto:string,
 
         public usuario:string,
@@ -9,5 +8,5 @@ export class Usuario{
         public email:string,
 
         public imagem:string
-    ){}
+        ){}
 }

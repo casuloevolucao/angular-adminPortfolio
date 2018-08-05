@@ -1,0 +1,105 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Novo Usuário
+  </h1>
+  <ol class="breadcrumb">
+    <li><a routerLink="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a routerLink="/admin/usuarios">Usuários</a></li>
+    <li class="active"><a href="/admin/novoUsuario">Cadastrar</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Novo Usuário</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+          <div class="box-body">
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <input type="text" class="form-control" placeholder="Digite o nome completo" formControlName="nomeCompleto">
+              <div *ngIf="formulario.get('nomeCompleto').invalid && (formulario.get('nomeCompleto').dirty || formulario.get('nomeCompleto').touched)"
+              class="alert alert-danger"
+              >
+                <div *ngIf="formulario.get('nomeCompleto').hasError('required')">
+                  campo é Requerido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label >Usuário</label>
+              <input type="text" class="form-control" placeholder="Digite o Usuário" formControlName="usuario">
+              <div *ngIf="formulario.get('usuario').invalid && (formulario.get('usuario').dirty || formulario.get('usuario').touched)"
+              class="alert alert-danger"
+              >
+                <div *ngIf="formulario.get('usuario').hasError('required')">
+                  campo é Requerido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" class="form-control" placeholder="Digite o e-mail" formControlName="email">
+
+              <div *ngIf="formulario.get('email').invalid && (formulario.get('email').dirty || formulario.get('email').touched)"
+              class="alert alert-danger"
+              >
+                <div *ngIf="formulario.get('email').hasError('required')">
+                  campo é Requerido
+                </div>
+                <div *ngIf="formulario.get('email').hasError('email')">
+                  Email inválido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Senha</label>
+              <input type="password" class="form-control" placeholder="Digite a senha" formControlName="senha">
+              <div *ngIf="formulario.get('senha').invalid && (formulario.get('senha').dirty || formulario.get('senha').touched)"
+              class="alert alert-danger"
+              >
+                <div *ngIf="formulario.get('senha').hasError('required')">
+                  campo é Requerido
+                </div>
+
+                <div *ngIf="formulario.get('senha').hasError('minlength')">
+                  Minimo 6 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
+              </label>
+            </div>
+          </div>
+          <div *ngIf="Erro !=undefined" class="alet alert-danger">
+            {{Erro}}
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success" [disabled]="!formulario.valid">Cadastrar</button>
+          </div>
+        </form>
+      </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

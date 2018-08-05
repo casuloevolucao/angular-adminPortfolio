@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
+import { HttpModule } from '@angular/http'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import localePt from '@angular/common/locales/pt';
@@ -27,6 +28,9 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { ResetPasswordComponent } from './acesso/reset-password/reset-password.component';
 import { AdminIndexComponent } from './admin/routes/admin-index/admin-index.component';
 import { AdminUsuariosComponent } from './admin/routes/admin-usuarios/admin-usuarios.component';
+import { AdminNovoUsuarioComponent } from './admin/routes/admin-novo-usuario/admin-novo-usuario.component';
+import { AdminEditarUsuarioComponent } from './admin/routes/admin-editar-usuario/admin-editar-usuario.component';
+import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.component';
 
 
 
@@ -44,10 +48,14 @@ import { AdminUsuariosComponent } from './admin/routes/admin-usuarios/admin-usua
     ResetPasswordComponent,
     AdminIndexComponent,
     AdminUsuariosComponent,
+    AdminNovoUsuarioComponent,
+    AdminEditarUsuarioComponent,
+    AdminPerfilComponent,
 
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot(ROUTER),
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

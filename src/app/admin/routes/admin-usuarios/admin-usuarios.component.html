@@ -19,7 +19,7 @@
         <div class="box box-primary">
               
               <div class="box-header">
-                <a href="#" class="btn btn-success">Cadastrar Usuário</a>
+                <a routerLink="/admin/novoUsuario" class="btn btn-success">Cadastrar Usuário</a>
               </div>
   
               <div class="box-body no-padding">
@@ -41,7 +41,7 @@
                       <td>{{usuarios.email}}</td>
                       <td>{{usuarios.usuario}}</td>
                       <td>
-                        <a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                        <button routerLink="/admin/editarUsuario" (click)="onEditar(usuarios)" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
                         <button (click)="onDelete(usuarios.$key)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button>
                       </td>
                     </tr>

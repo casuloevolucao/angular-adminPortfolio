@@ -35,4 +35,18 @@ export class Db{
         
     }
 
+    public exibirUsuarioSeleecionado():Usuario{
+
+        return this.usuarios
+    }
+
+    public getUsuarioEditado(usuario: Usuario):void{
+        
+       this.usuarios = usuario
+    }
+
+    public atualizaarUsuario(usuario:Usuario):void{
+ 
+    }
+
 }

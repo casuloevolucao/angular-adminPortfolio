@@ -27,10 +27,7 @@ export class AdminUsuariosComponent implements OnInit {
       item.forEach(element => {
         var y = element.payload.toJSON();
         y["$key"] = element.key;
-
-        console.log(y)
         this.usuario.push(y as Usuario);
-        console.log(this.usuario)
       });
     });  
   }
@@ -40,6 +37,10 @@ export class AdminUsuariosComponent implements OnInit {
     this.db.deleteUsuario($key)
     this.toast.warning("Removido com sucesso !!")
     }
+  }
+
+  public onEditar(usuario: Usuario):void{
+    this.db.getUsuarioEditado(usuario)
   }
 
 }

@@ -6,11 +6,6 @@
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyAGHUI33CZIl2H2Z7iBaDd2EPVqUeCfQd8",
-    authDomain: "jta-jobnateadmin-10530.firebaseapp.com",
-    databaseURL: "https://jta-jobnateadmin-10530.firebaseio.com",
-    projectId: "jta-jobnateadmin-10530",
-    storageBucket: "",
-    messagingSenderId: "653744194995"
+    
   }
 };

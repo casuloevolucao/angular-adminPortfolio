@@ -1,9 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Injectable } from '../../node_modules/@angular/core';
-import { Usuario } from './shared/usuario.model';
-import { Senha } from './shared/senha.model';
-import { Router } from '../../node_modules/@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class Auth{
@@ -13,10 +10,9 @@ export class Auth{
     constructor(
         private router:Router,
         private Auth:AngularFireAuth,
-        private Data:AngularFireDatabase
     ){}
-
-    public CadastrarUsuario(usuario:Usuario, senha:Senha):Promise<any>{
+/*
+    public CadastrarUsuario(usuario:Usuario):Promise<any>{
         
         
 
@@ -32,7 +28,7 @@ export class Auth{
             })
 
     }
-
+*/
     public login(email, senha):Promise<any>{
 
         return this.Auth.auth.signInWithEmailAndPassword(email, senha)

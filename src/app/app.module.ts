@@ -3,18 +3,17 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
-import { Auth } from './Auth.service';
-import { authGuard } from './Auth-guard.service';
-import { Db } from './controlDados.service';
 import { ROUTER } from './app.routes';
 import { environment } from '../environments/environment';
 import { ToastrModule } from 'ngx-toastr';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Auth } from './acesso/Auth.service';
+import { authGuard } from './acesso/Auth-guard.service';
+import { Db } from './admin/controlDados.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -24,7 +23,6 @@ import { AdminControlSidebarComponent } from './admin/admin-control-sidebar/admi
 import { AdminLeftSideComponent } from './admin/admin-left-side/admin-left-side.component';
 import { AcessoComponent } from './acesso/acesso.component';
 import { LoginComponent } from './acesso/login/login.component';
-import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { ResetPasswordComponent } from './acesso/reset-password/reset-password.component';
 import { AdminIndexComponent } from './admin/routes/admin-index/admin-index.component';
 import { AdminUsuariosComponent } from './admin/routes/admin-usuarios/admin-usuarios.component';
@@ -44,7 +42,6 @@ import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.c
     AdminLeftSideComponent,
     AcessoComponent,
     LoginComponent,
-    CadastroComponent,
     ResetPasswordComponent,
     AdminIndexComponent,
     AdminUsuariosComponent,
@@ -59,14 +56,13 @@ import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.c
     RouterModule.forRoot(ROUTER),
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
 
   ],
-  providers: [Auth, authGuard, Db, [{provide:LOCALE_ID, setValue:'pt'}]],
+  providers: [Auth, authGuard, Db],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-registerLocaleData(localePt, 'pt');

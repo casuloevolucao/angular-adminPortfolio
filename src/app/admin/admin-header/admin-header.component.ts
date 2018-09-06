@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '../../Auth.service';
-import { Db } from '../../controlDados.service';
-import * as firebase from 'firebase';
+import { Db } from '../controlDados.service';
 import { Usuario } from '../../shared/usuario.model';
+import { Auth } from '../../acesso/Auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-admin-header',
@@ -11,48 +11,44 @@ import { Usuario } from '../../shared/usuario.model';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  public email:string
+  email:string
 
-  public usuario:Usuario
+  usuario:Usuario = new Usuario()
 
-  public hoje:number = Date.now()
+  date:number = Date.now()
 
   constructor(
-    private auth:Auth,
+    private Auth: AngularFireAuth,
+    private AuthS: Auth,
     private db:Db
   ) {
     setInterval(()=>{
-      this.usuario
-      this.hoje
+      this.date = Date.now()
     },1)
+
+    this.db.getUser()
+
+    .subscribe(itens=>{
+
+      itens.filter((user:Usuario)=>{
+        if(user.email == this.email){
+
+          this.usuario = user
+        }
+      })
+    })
+    
   }
 
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged((user)=>{
-    this.email = user.email
-      
-    this.mostrarUsuario()
-    }) 
-  }
-
-  public mostrarUsuario():void{ 
-    this.db.consultarUsuario(this.email)
-    
-    .then((Response:any)=>{
-      this.usuario = new Usuario(
-        Response.val().nomeCompleto,
-        Response.val().usuario,
-        Response.val().email,
-        Response.val().imagem
-      )
+    this.Auth.auth.onAuthStateChanged(user=>{
+      this.email = user.email
     })
-
   }
 
   public logout():void{
-
-    this.auth.logout()
+     this.AuthS.logout()
   }
 
 }

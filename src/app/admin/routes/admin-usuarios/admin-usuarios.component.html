@@ -29,20 +29,18 @@
                       <th style="width: 10px">ID</th>
                       <th>Nome</th>
                       <th>E-mail</th>
-                      <th>Login</th>
                       <th style="width: 140px">&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
                     
-                    <tr *ngFor="let usuarios of usuario; index as i">
-                      <td>{{i}}</td>
-                      <td>{{usuarios.nomeCompleto}}</td>
+                    <tr *ngFor="let usuarios of usuario;">
+                      <td>{{usuarios.uid}}</td>
+                      <td>{{usuarios.name}}</td>
                       <td>{{usuarios.email}}</td>
-                      <td>{{usuarios.usuario}}</td>
                       <td>
-                        <button routerLink="/admin/editarUsuario" (click)="onEditar(usuarios)" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
-                        <button (click)="onDelete(usuarios.$key)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button>
+                        <button routerLink="/admin/editarUsuario" (click)="Editar(usuarios)" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
+                        <button (click)="Delete(usuarios)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button>
                       </td>
                     </tr>
                   </tbody>

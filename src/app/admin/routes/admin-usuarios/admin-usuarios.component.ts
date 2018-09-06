@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Db } from '../../../controlDados.service';
-import * as firebase  from 'firebase'
+import { Db } from '../../controlDados.service';
 import { Usuario } from '../../../shared/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -21,26 +20,19 @@ export class AdminUsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var x = this.db.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.usuario = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y["$key"] = element.key;
-        this.usuario.push(y as Usuario);
-      });
-    });  
+   this.db.getUser()
+
+   .subscribe(itens=>{
+     this.usuario = itens
+   })
   }
 
-  public onDelete($key:string){
-    if(confirm('Tem certeza ?') == true){
-    this.db.deleteUsuario($key)
-    this.toast.warning("Removido com sucesso !!")
-    }
+  Editar(usuario){
+    console.log(usuario)
   }
 
-  public onEditar(usuario: Usuario):void{
-    this.db.getUsuarioEditado(usuario)
+  Delete(usuario){
+    console.log(usuario)
   }
 
 }

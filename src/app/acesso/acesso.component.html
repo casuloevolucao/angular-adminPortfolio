@@ -1,11 +1,4 @@
 <div class="container bg">
-    <div class="row">
-        <div *ngIf="cadastro; else login">
-            <app-cadastro (trocaLogin)="Troca($event)"></app-cadastro>
-        </div>
-        <ng-template #login>
-            <app-login (trocaCadastro)="Troca($event)"></app-login> 
-        </ng-template>
-    </div>
+    <app-login></app-login>
 </div>
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Auth } from '../../Auth.service';
+import { Auth } from '../Auth.service';
 import { Usuario } from '../../shared/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Output() public trocaCadastro: EventEmitter<string> = new EventEmitter()
 
   public Erro:string
 
@@ -28,14 +27,10 @@ export class LoginComponent implements OnInit {
   }
 
   public login():void{
-   
-    let email = this.formulario.value.email
 
-    let senha = this.formulario.value.senha
-
-    this.auth.login(email, senha)
+    this.auth.login(this.formulario.value.email, this.formulario.value.senha)
     
-    .then((Response:any)=>{
+    .then(()=>{
       this.tostr.success('Login Aceito', 'BEM-VINDO');
     })
 
@@ -46,10 +41,6 @@ export class LoginComponent implements OnInit {
       this.tostr.error(`${this.Erro}`, 'ERRO')
     })
     
-  }
-
-  public trocar ():void{
-    this.trocaCadastro.emit('cadastro')
   }
   
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '../../Auth.service';
-import { Db } from '../../controlDados.service';
 import { Usuario } from '../../shared/usuario.model';
-import * as firebase from 'firebase';
+import { Db } from '../controlDados.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-admin-left-side',
@@ -16,30 +15,27 @@ export class AdminLeftSideComponent implements OnInit {
   public usuario:Usuario
 
   constructor(
-    private auth:Auth,
+    private Auth: AngularFireAuth,
     private db:Db
-  ) { }
+  ) {
+    this.db.getUser()
+
+    .subscribe(itens=>{
+
+      itens.filter((user:Usuario)=>{
+        if(user.email == this.email){
+          this.usuario = user
+        }
+      })
+    })
+   }
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged((user)=>{
+    this.Auth.auth.onAuthStateChanged(user=>{
       this.email = user.email
-      this.exibirUsuario()
     })
   }
 
-  public exibirUsuario():void{
-
-    this.db.consultarUsuario(this.email)
-
-    .then((Response:any)=>{
-      this.usuario = new Usuario(
-        Response.val().nomeCompleto,
-        Response.val().usuario,
-        Response.val().email,
-        Response.val().imagem
-      )
-      
-    })
-  }
+ 
 
 }

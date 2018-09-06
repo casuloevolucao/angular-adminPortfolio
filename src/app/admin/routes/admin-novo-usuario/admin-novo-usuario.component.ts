@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Auth } from '../../../Auth.service';
 import { Usuario } from '../../../shared/usuario.model';
-import { Senha } from '../../../shared/senha.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -25,7 +23,6 @@ export class AdminNovoUsuarioComponent implements OnInit {
   })
 
   constructor(
-    private auth:Auth,
     private toast:ToastrService,
     private router: Router
   ) { }
@@ -34,30 +31,7 @@ export class AdminNovoUsuarioComponent implements OnInit {
   }
 
   public onSubmit():void{
-    let usuario: Usuario = new Usuario(
-      this.formulario.value.nomeCompleto,
-      this.formulario.value.usuario,
-      this.formulario.value.email, 
-      this.imgPadrao
-    )
-    let senha:Senha = new Senha(
-      this.formulario.value.senha 
-    )
-
-    this.auth.CadastrarUsuario(usuario, senha)
-
-    .then((Response:any)=>{
-      this.router.navigate(['/admin/usuarios'])
-      this.toast.success('bem sucedido', 'CADASTRO');
-    })
-
-    .catch((Response:any)=>{
-
-      this.Erro = Response.message
-
-      this.toast.error(`${this.Erro}`, 'ERRO')
-
-    })
+   
   }
 
 }

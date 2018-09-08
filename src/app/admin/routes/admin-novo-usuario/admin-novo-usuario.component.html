@@ -26,24 +26,12 @@
         <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
           <div class="box-body">
             <div class="form-group">
-              <label>Nome Completo</label>
+              <label>Nome</label>
               <input type="text" class="form-control" placeholder="Digite o nome completo" formControlName="nomeCompleto">
               <div *ngIf="formulario.get('nomeCompleto').invalid && (formulario.get('nomeCompleto').dirty || formulario.get('nomeCompleto').touched)"
               class="alert alert-danger"
               >
                 <div *ngIf="formulario.get('nomeCompleto').hasError('required')">
-                  campo é Requerido
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label >Usuário</label>
-              <input type="text" class="form-control" placeholder="Digite o Usuário" formControlName="usuario">
-              <div *ngIf="formulario.get('usuario').invalid && (formulario.get('usuario').dirty || formulario.get('usuario').touched)"
-              class="alert alert-danger"
-              >
-                <div *ngIf="formulario.get('usuario').hasError('required')">
                   campo é Requerido
                 </div>
               </div>
@@ -81,14 +69,6 @@
               </div>
             </div>
 
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
-              </label>
-            </div>
-          </div>
-          <div *ngIf="Erro !=undefined" class="alet alert-danger">
-            {{Erro}}
           </div>
           <!-- /.box-body -->
           <div class="box-footer">

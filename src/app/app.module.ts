@@ -13,6 +13,7 @@ import { Db } from './admin/controlDados.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,10 @@ import { AdminUsuariosComponent } from './admin/routes/admin-usuarios/admin-usua
 import { AdminNovoUsuarioComponent } from './admin/routes/admin-novo-usuario/admin-novo-usuario.component';
 import { AdminEditarUsuarioComponent } from './admin/routes/admin-editar-usuario/admin-editar-usuario.component';
 import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.component';
+import { AdminPagesComponent } from './admin/routes/admin-pages/admin-pages.component';
+import { AdminPageTeamComponent } from './admin/routes/admin-page-team/admin-page-team.component';
+import { AdminPagePortfolioComponent } from './admin/routes/admin-page-portfolio/admin-page-portfolio.component';
+import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-page-about.component';
 
 
 
@@ -48,6 +53,10 @@ import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.c
     AdminNovoUsuarioComponent,
     AdminEditarUsuarioComponent,
     AdminPerfilComponent,
+    AdminPagesComponent,
+    AdminPageTeamComponent,
+    AdminPagePortfolioComponent,
+    AdminPageAboutComponent,
 
   ],
   imports: [
@@ -58,6 +67,7 @@ import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.c
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
 

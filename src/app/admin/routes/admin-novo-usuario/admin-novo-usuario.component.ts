@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../../../shared/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Auth } from '../../../acesso/Auth.service';
 
 @Component({
   selector: 'app-admin-novo-usuario',
@@ -11,27 +12,43 @@ import { Router } from '@angular/router';
 })
 export class AdminNovoUsuarioComponent implements OnInit {
 
-  public Erro:string
+  usuario:Usuario = new Usuario()
 
-  public imgPadrao:string = "/assets/img/user-160x160.jpg"
+  imgPadrao:string = "/assets/img/user.jpg"
 
-  public formulario:FormGroup = new FormGroup({
+  formulario:FormGroup = new FormGroup({
     'nomeCompleto': new FormControl(null, [Validators.required]),
-    'usuario': new FormControl(null, [Validators.required]),
     'email': new FormControl(null, [Validators.required, Validators.email]),
     'senha': new FormControl(null, [Validators.required]),
   })
 
   constructor(
     private toast:ToastrService,
-    private router: Router
+    private router: Router,
+    private AuthS: Auth
   ) { }
 
   ngOnInit() {
   }
 
-  public onSubmit():void{
-   
+  onSubmit(){
+   this.usuario.email = this.formulario.value.email
+   this.usuario.senha = this.formulario.value.senha
+   this.usuario.name = this.formulario.value.nomeCompleto
+   this.usuario.imagem = this.imgPadrao
+   this.usuario.status = 'online'
+    
+   console.log(this.usuario)
+   this.AuthS.CadastrarUsuario(this.usuario)
+    .then(()=>{
+      this.router.navigate(['/admin'])
+      this.toast.success('Criado com sucesso !!!', `Usuário ${this.formulario.value.nomeCompleto}`)
+    }) 
+
+    .catch(erro=>{
+      this.toast.error(`Erro Code ${erro.code}`, `${erro.message}`)
+    })
+  
   }
 
 }

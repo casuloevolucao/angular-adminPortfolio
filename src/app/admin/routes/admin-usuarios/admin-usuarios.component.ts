@@ -20,11 +20,10 @@ export class AdminUsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.db.getUser()
-
-   .subscribe(itens=>{
-     this.usuario = itens
-   })
+    this.db.getUsers()
+    .subscribe((itens:any)=>{
+      this.usuario = itens
+    })
   }
 
   Editar(usuario){

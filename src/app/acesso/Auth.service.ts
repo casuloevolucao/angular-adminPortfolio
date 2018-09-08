@@ -1,6 +1,8 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from '../shared/usuario.model';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class Auth{
@@ -10,41 +12,40 @@ export class Auth{
     constructor(
         private router:Router,
         private Auth:AngularFireAuth,
+        private Data: AngularFirestore
     ){}
-/*
-    public CadastrarUsuario(usuario:Usuario):Promise<any>{
-        
-        
 
-        return this.Auth.auth.createUserWithEmailAndPassword(usuario.email, senha.senha)
-
-            .then((Response:any)=>{
-
-                delete senha.senha
-
-                this.Data.database.ref(`usuarioDetalhe/${btoa(usuario.email)}`)
-
-                .set(usuario)
+    public CadastrarUsuario(usuario: Usuario){
+          
+        return this.Auth.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha)
+        .then((res)=>{
+            delete usuario.senha
+            this.Data.collection('users').add({
+                name: usuario.name,
+                email: usuario.email,
+                photo: usuario.imagem,
+                status: usuario.status,
+                uid: res.uid
             })
-
+        })
     }
-*/
-    public login(email, senha):Promise<any>{
+
+    public login(email, senha){
 
         return this.Auth.auth.signInWithEmailAndPassword(email, senha)
 
-        .then((Response:any)=>{
+        .then(()=>{
 
             this.Auth.auth.currentUser.getIdToken()
 
             .then((idToken:any)=>{
-                   
+                 /*  
                 if(this.Auth.auth.currentUser.emailVerified){
                     
                 }else{
                     this.Auth.auth.currentUser.sendEmailVerification()
                 }
-
+                */
                 this.IdToken = idToken
 
                 localStorage.setItem('idToken', idToken)
@@ -66,14 +67,14 @@ export class Auth{
         return this.IdToken !== undefined
     }
 
-    public logout():void{
+    public logout(){
         this.Auth.auth.signOut()
         localStorage.removeItem('idToken')
         this.IdToken = undefined
         this.router.navigate(["/"])        
     }
 
-    public Forgot(email:string):Promise<any>{
+    public Forgot(email:string){
         
         return this.Auth.auth.sendPasswordResetEmail(email)
     }

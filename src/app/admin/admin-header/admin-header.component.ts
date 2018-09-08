@@ -3,6 +3,7 @@ import { Db } from '../controlDados.service';
 import { Usuario } from '../../shared/usuario.model';
 import { Auth } from '../../acesso/Auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from '../../../../node_modules/angularfire2/firestore';
 
 @Component({
   selector: 'app-admin-header',
@@ -20,30 +21,28 @@ export class AdminHeaderComponent implements OnInit {
   constructor(
     private Auth: AngularFireAuth,
     private AuthS: Auth,
-    private db:Db
+    private db:Db,
+    private Data:AngularFirestore
   ) {
     setInterval(()=>{
       this.date = Date.now()
     },1)
-
-    this.db.getUser()
-
-    .subscribe(itens=>{
-
-      itens.filter((user:Usuario)=>{
-        if(user.email == this.email){
-
-          this.usuario = user
-        }
-      })
-    })
-    
+  
   }
-
 
   ngOnInit() {
     this.Auth.auth.onAuthStateChanged(user=>{
+      
       this.email = user.email
+
+      this.Data.collection('users').valueChanges()
+      .subscribe(item=>{
+        item.filter((item:any)=>{
+          if(item.uid == user.uid){
+            this.usuario = item
+          }
+        })
+      })
     })
   }
 

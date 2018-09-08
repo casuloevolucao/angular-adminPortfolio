@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../shared/usuario.model';
 import { Db } from '../controlDados.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from '../../../../node_modules/angularfire2/firestore';
 
 @Component({
   selector: 'app-admin-left-side',
@@ -16,26 +17,28 @@ export class AdminLeftSideComponent implements OnInit {
 
   constructor(
     private Auth: AngularFireAuth,
-    private db:Db
+    private db:Db,
+    private Data: AngularFirestore
   ) {
-    this.db.getUser()
-
-    .subscribe(itens=>{
-
-      itens.filter((user:Usuario)=>{
-        if(user.email == this.email){
-          this.usuario = user
-        }
-      })
-    })
+    
+    
    }
 
   ngOnInit() {
     this.Auth.auth.onAuthStateChanged(user=>{
       this.email = user.email
+      
+      this.Data.collection('users').valueChanges()
+      .subscribe(item=>{
+        item.filter((item:any)=>{
+          if(item.uid == user.uid){
+
+            this.usuario = item
+          }
+        })
+      })
+
     })
   }
-
- 
 
 }

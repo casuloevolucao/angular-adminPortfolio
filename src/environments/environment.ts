@@ -5,12 +5,4 @@
 
 export const environment = {
   production: false,
-  firebase:{
-    apiKey: "AIzaSyDja4oeAVpfk0cJJAA-tsURMDCqqV23Fuk",
-    authDomain: "casulo-portfolio.firebaseapp.com",
-    databaseURL: "https://casulo-portfolio.firebaseio.com",
-    projectId: "casulo-portfolio",
-    storageBucket: "casulo-portfolio.appspot.com",
-    messagingSenderId: "394929133002"
-  }
 };

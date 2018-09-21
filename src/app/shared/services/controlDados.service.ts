@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class Db{
@@ -10,10 +10,9 @@ export class Db{
 
     ){}
 
+    getTeam():Observable<any>{
 
-    getUsers(){
-
-        return this.Data.collection('users').valueChanges()
+        return this.Data.collection('team').valueChanges()
     }
 
     editTeam(id,item, img){

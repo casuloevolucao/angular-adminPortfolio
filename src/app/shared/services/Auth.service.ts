@@ -17,6 +17,14 @@ export class Auth{
 
     public CadastrarUsuario(usuario: Usuario){
           
+        return this.Auth.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha)
+
+        .then(()=>{
+            this.Auth.auth.currentUser.updateProfile({
+                displayName: usuario.name,
+                photoURL: usuario.imagem
+            })
+        })
         
     }
 

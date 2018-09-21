@@ -31,7 +31,7 @@
               </thead>
               <tbody>
                 
-                <tr *ngFor="let teams of team | async">
+                <tr *ngFor="let teams of team">
                   <td>{{teams.name}}</td>
                   <td>{{teams.title}}</td>
                   <td>{{teams.bio}}</td>
@@ -48,7 +48,7 @@
                     <img height="100px" width="100px" class="img-circle" [src]="teams.photo">
                   </td>
                   <td>
-                    <button data-toggle="modal" data-target="#editar" (click)="onEdit(teams)" style="margin-top: 25%;" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
+                    <button (click)="onEdit(teams, template)" style="margin-top: 25%;" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
                   </td>
                 </tr>
               </tbody>
@@ -64,132 +64,127 @@
   </div>
   <!-- /.content-wrapper -->
 
-<!-- Modal -->
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editar" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editar">Edit Team</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          
-          <div class="form-group has-feedback">
-            <label>Nome:</label>
-            <input 
-            type="text" 
-            class="form-control" 
-            placeholder="Digite seu nome"
-            formControlName="name"
-            >
-      
-            <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
-            class="alert alert-danger"
-            >
-              <div *ngIf="form.get('name').hasError('required')">
-                campo é Requerido
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group has-feedback">
-            <label>Titulo:</label>
-            <input 
-            type="text" 
-            class="form-control" 
-            placeholder="Digite o Titulo"
-            formControlName="title"
-            >
-      
-            <div *ngIf="form.get('title').invalid && (form.get('title').dirty || form.get('title').touched)"
-            class="alert alert-danger"
-            >
-              <div *ngIf="form.get('title').hasError('required')">
-                campo é Requerido
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group has-feedback">
-            <label>Biográfia:</label>
-            <textarea 
-            rows="3"
-            class="form-control" 
-            placeholder="Digite Sua biografia"
-            formControlName="bio"
-            ></textarea>
-      
-            <div *ngIf="form.get('bio').invalid && (form.get('bio').dirty || form.get('bio').touched)"
-            class="alert alert-danger"
-            >
-              <div *ngIf="form.get('bio').hasError('required')">
-                campo é Requerido
-              </div>
-            </div>
-          </div>
-          <div formGroupName="social">
-            <label>Redes Socias:</label>      
-            <div class="form-group has-feedback">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Digite a Url do Facebook"
-              formControlName="facebook"
-              >
-            </div>
-            <div class="form-group has-feedback">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Digite a Url do Github"
-              formControlName="github"
-              >
-            </div>
-            <div class="form-group has-feedback">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Digite a Url do instagram"
-              formControlName="instagram"
-              >
-            </div>
-            <div class="form-group has-feedback">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Digite a Url do linkedin"
-              formControlName="linkedin"
-              >
-            </div>
-            <div class="form-group has-feedback">
-              <input 
-              type="text" 
-              class="form-control" 
-              placeholder="Digite a Url do twitter"
-              formControlName="twitter"
-              >
-            </div>
-          </div>
-          
-          <div class="form-group has-feedback">
-            <label>Photo:</label>
-            <input 
-            type="file" 
-            class="form-control" 
-            (change)="onFileChange($event)"
-            accept="image/*"
-            >
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div> 
-    </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Usuário(a) {{editarTeam.name}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      
+        <div class="form-group has-feedback">
+          <label>Nome:</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Digite seu nome"
+          formControlName="name"
+          >
+    
+          <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
+          class="alert alert-danger"
+          >
+            <div *ngIf="form.get('name').hasError('required')">
+              campo é Requerido
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback">
+          <label>Titulo:</label>
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Digite o Titulo"
+          formControlName="title"
+          >
+    
+          <div *ngIf="form.get('title').invalid && (form.get('title').dirty || form.get('title').touched)"
+          class="alert alert-danger"
+          >
+            <div *ngIf="form.get('title').hasError('required')">
+              campo é Requerido
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback">
+          <label>Biográfia:</label>
+          <textarea 
+          rows="3"
+          class="form-control" 
+          placeholder="Digite Sua biografia"
+          formControlName="bio"
+          ></textarea>
+    
+          <div *ngIf="form.get('bio').invalid && (form.get('bio').dirty || form.get('bio').touched)"
+          class="alert alert-danger"
+          >
+            <div *ngIf="form.get('bio').hasError('required')">
+              campo é Requerido
+            </div>
+          </div>
+        </div>
+        <div formGroupName="social">
+          <label>Redes Socias:</label>      
+          <div class="form-group has-feedback">
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Digite a Url do Facebook"
+            formControlName="facebook"
+            >
+          </div>
+          <div class="form-group has-feedback">
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Digite a Url do Github"
+            formControlName="github"
+            >
+          </div>
+          <div class="form-group has-feedback">
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Digite a Url do instagram"
+            formControlName="instagram"
+            >
+          </div>
+          <div class="form-group has-feedback">
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Digite a Url do linkedin"
+            formControlName="linkedin"
+            >
+          </div>
+          <div class="form-group has-feedback">
+            <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Digite a Url do twitter"
+            formControlName="twitter"
+            >
+          </div>
+        </div>
+        
+        <div class="form-group has-feedback">
+          <label>Photo:</label>
+          <input 
+          type="file" 
+          class="form-control" 
+          (change)="onFileChanges($event.target.files)"
+          accept="image/*"
+          >
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+  </div>
+</ng-template>

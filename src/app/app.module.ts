@@ -5,9 +5,12 @@ import { HttpModule } from '@angular/http'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ROUTER } from './app.routes';
-
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
+//ngx bootstrap
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 //services
 import { Auth } from './shared/services/Auth.service';
@@ -19,6 +22,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage'
 
 //components
 import { AppComponent } from './app.component';
@@ -72,8 +76,11 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    SweetAlert2Module.forRoot()
 
   ],
   providers: [Auth, authGuard, Db],

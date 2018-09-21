@@ -4,6 +4,7 @@ import { Usuario } from '../../../shared/models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Auth } from '../../../shared/services/Auth.service';
+import  swal  from 'sweetalert2'
 
 @Component({
   selector: 'app-admin-novo-usuario',
@@ -36,6 +37,21 @@ export class AdminNovoUsuarioComponent implements OnInit {
    this.usuario.senha = this.formulario.value.senha
    this.usuario.name = this.formulario.value.nomeCompleto
    this.usuario.imagem = this.imgPadrao
+
+    this.AuthS.CadastrarUsuario(this.usuario)
+
+    .then(()=>{
+      swal({
+        position: 'top-end',
+        type: 'success',
+        title: 'Cadastro Bem sucedido!!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      this.router.navigate(['/admin'])
+    })
+
   }
 
 }

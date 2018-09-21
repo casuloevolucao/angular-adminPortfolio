@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Auth } from '../../shared/services/Auth.service';
 import { ToastrService } from 'ngx-toastr';
-
+import swal from 'sweetalert2'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,7 +30,17 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.formulario.value.email, this.formulario.value.senha)
     
     .then(()=>{
-      this.tostr.success('Login Aceito', 'BEM-VINDO');
+      const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000
+      });
+      
+      toast({
+        type: 'success',
+        title: `Login Aceito Bem-Vindo(a) ${this.formulario.value.email}`
+      })
     })
 
     .catch((Response:any)=>{

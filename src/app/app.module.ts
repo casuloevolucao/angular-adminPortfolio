@@ -1,21 +1,26 @@
+//package de dev
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ROUTER } from './app.routes';
-import { environment } from '../environments/environment';
+
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Auth } from './acesso/Auth.service';
-import { authGuard } from './acesso/Auth-guard.service';
-import { Db } from './admin/controlDados.service';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+//services
+import { Auth } from './shared/services/Auth.service';
+import { authGuard } from './shared/services/Auth-guard.service';
+import { Db } from './shared/services/controlDados.service';
 
+//firebase config
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+//components
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
@@ -67,7 +72,6 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
 

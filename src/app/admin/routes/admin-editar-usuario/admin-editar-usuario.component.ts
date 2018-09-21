@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Usuario } from '../../../shared/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Db } from '../../controlDados.service';
 
 @Component({
   selector: 'app-admin-editar-usuario',
@@ -27,7 +25,6 @@ export class AdminEditarUsuarioComponent implements OnInit {
   constructor(
     private toast:ToastrService,
     private router: Router,
-    private db:Db
   ) { }
 
   ngOnInit() {

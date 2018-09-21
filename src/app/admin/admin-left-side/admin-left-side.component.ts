@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../shared/usuario.model';
-import { Db } from '../controlDados.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from '../../../../node_modules/angularfire2/firestore';
+import { Usuario } from '../../shared/models/usuario.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-admin-left-side',
@@ -13,32 +12,28 @@ export class AdminLeftSideComponent implements OnInit {
 
   public email:string
 
-  public usuario:Usuario
+  public usuario:Usuario = new Usuario()
 
   constructor(
-    private Auth: AngularFireAuth,
-    private db:Db,
-    private Data: AngularFirestore
-  ) {
-    
-    
-   }
+    private afa: AngularFireAuth,
+    private aft: AngularFirestore
+  ) {}
 
   ngOnInit() {
-    this.Auth.auth.onAuthStateChanged(user=>{
+  
+    this.afa.auth.onAuthStateChanged(user=>{
       this.email = user.email
-      
-      this.Data.collection('users').valueChanges()
-      .subscribe(item=>{
-        item.filter((item:any)=>{
-          if(item.uid == user.uid){
+
+      this.aft.collection('users').valueChanges().subscribe(itens=>{
+
+        itens.filter((item:any)=>{
+
+          if(item.email == this.email){
 
             this.usuario = item
           }
         })
       })
-
     })
   }
-
 }

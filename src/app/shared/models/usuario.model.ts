@@ -8,6 +8,4 @@ export class Usuario{
         public senha:string
 
         public imagem:string
-
-        public status:string
 }

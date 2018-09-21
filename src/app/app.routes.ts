@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router'; 
-import { authGuard } from './acesso/Auth-guard.service';
+import { authGuard } from './shared/services/Auth-guard.service';
 import { AcessoComponent } from './acesso/acesso.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminIndexComponent } from './admin/routes/admin-index/admin-index.component';
@@ -14,7 +14,7 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
 
 export const ROUTER: Routes = [
     
-    { path: '', component: AcessoComponent },
+    {path: '', component: AcessoComponent },
     {path: 'admin', component: AdminComponent, canActivate:[authGuard], children:[
         {path:'', component:AdminIndexComponent},
         {path:'usuarios', component:AdminUsuariosComponent},

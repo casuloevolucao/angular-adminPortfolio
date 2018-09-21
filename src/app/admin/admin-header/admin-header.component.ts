@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Db } from '../controlDados.service';
-import { Usuario } from '../../shared/usuario.model';
-import { Auth } from '../../acesso/Auth.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from '../../../../node_modules/angularfire2/firestore';
+import { Usuario } from '../../shared/models/usuario.model';
+import { Auth } from '../../shared/services/Auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-admin-header',
@@ -19,10 +18,9 @@ export class AdminHeaderComponent implements OnInit {
   date:number = Date.now()
 
   constructor(
-    private Auth: AngularFireAuth,
+    private afa: AngularFireAuth,
     private AuthS: Auth,
-    private db:Db,
-    private Data:AngularFirestore
+    private aft:AngularFirestore
   ) {
     setInterval(()=>{
       this.date = Date.now()
@@ -31,14 +29,15 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Auth.auth.onAuthStateChanged(user=>{
-      
+    this.afa.auth.onAuthStateChanged(user=>{
       this.email = user.email
 
-      this.Data.collection('users').valueChanges()
-      .subscribe(item=>{
-        item.filter((item:any)=>{
-          if(item.uid == user.uid){
+      this.aft.collection('users').valueChanges().subscribe(itens=>{
+
+        itens.filter((item:any)=>{
+
+          if(item.email == this.email){
+
             this.usuario = item
           }
         })

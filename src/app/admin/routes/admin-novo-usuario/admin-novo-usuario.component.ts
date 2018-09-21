@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Usuario } from '../../../shared/usuario.model';
+import { Usuario } from '../../../shared/models/usuario.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Auth } from '../../../acesso/Auth.service';
+import { Auth } from '../../../shared/services/Auth.service';
 
 @Component({
   selector: 'app-admin-novo-usuario',
@@ -36,19 +36,6 @@ export class AdminNovoUsuarioComponent implements OnInit {
    this.usuario.senha = this.formulario.value.senha
    this.usuario.name = this.formulario.value.nomeCompleto
    this.usuario.imagem = this.imgPadrao
-   this.usuario.status = 'online'
-    
-   console.log(this.usuario)
-   this.AuthS.CadastrarUsuario(this.usuario)
-    .then(()=>{
-      this.router.navigate(['/admin'])
-      this.toast.success('Criado com sucesso !!!', `Usuário ${this.formulario.value.nomeCompleto}`)
-    }) 
-
-    .catch(erro=>{
-      this.toast.error(`Erro Code ${erro.code}`, `${erro.message}`)
-    })
-  
   }
 
 }

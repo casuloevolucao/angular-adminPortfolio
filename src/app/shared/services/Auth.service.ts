@@ -1,8 +1,8 @@
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../shared/usuario.model';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Usuario } from '../models/usuario.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable()
 export class Auth{
@@ -17,17 +17,7 @@ export class Auth{
 
     public CadastrarUsuario(usuario: Usuario){
           
-        return this.Auth.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha)
-        .then((res)=>{
-            delete usuario.senha
-            this.Data.collection('users').add({
-                name: usuario.name,
-                email: usuario.email,
-                photo: usuario.imagem,
-                status: usuario.status,
-                uid: res.uid
-            })
-        })
+        
     }
 
     public login(email, senha){

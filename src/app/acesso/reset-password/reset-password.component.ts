@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Auth } from '../Auth.service';
+import { Auth } from '../../shared/services/Auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -23,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
   }
+
   onSubmit(){
     this.auth.Forgot(this.formulario.value.email)
 

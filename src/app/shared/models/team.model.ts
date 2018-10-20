@@ -1,7 +1,9 @@
 import { Social } from "./social.model";
 
 export class Team{
-  
+
+    public id:string
+
     public name:string
 
     public title:string
@@ -10,5 +12,5 @@ export class Team{
 
     public social:Social
     
-    public image:string
+    public photo:string
 }

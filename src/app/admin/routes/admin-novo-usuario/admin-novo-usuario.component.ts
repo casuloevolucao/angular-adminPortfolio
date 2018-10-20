@@ -15,7 +15,7 @@ export class AdminNovoUsuarioComponent implements OnInit {
 
   usuario:Usuario = new Usuario()
 
-  imgPadrao:string = "/assets/img/user.jpg"
+  imgPadrao:string = "https://firebasestorage.googleapis.com/v0/b/casulo-portfolio.appspot.com/o/users%2Fuser.jpg?alt=media&token=1bc377ba-9887-46d9-8a9b-9ca3a2e33fd4"
 
   formulario:FormGroup = new FormGroup({
     'nomeCompleto': new FormControl(null, [Validators.required]),
@@ -36,7 +36,7 @@ export class AdminNovoUsuarioComponent implements OnInit {
    this.usuario.email = this.formulario.value.email
    this.usuario.senha = this.formulario.value.senha
    this.usuario.name = this.formulario.value.nomeCompleto
-   this.usuario.imagem = this.imgPadrao
+   this.usuario.photo = this.imgPadrao
 
     this.AuthS.CadastrarUsuario(this.usuario)
 

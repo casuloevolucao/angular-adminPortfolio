@@ -1,0 +1,157 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Categories Controller
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> home</a></li>
+        <li class="active">Page cateories controller</li>
+      </ol>
+    </section>
+  
+    <!-- Main content -->
+    <!-- Main content -->
+  <section class="content">
+  
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-body no-padding">
+            <div class="box-header">
+                <button (click)="onAdd(modal)" class="btn btn-success">Cadastrar Nova Categoria</button>
+            </div>
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Photo</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr *ngFor="let c of cateories" class="text-center">
+                  <td>{{c.name}}</td>       
+                  <td>
+                    <img height="100px" width="100px" class="img-circle" [src]="c.photo">
+                  </td>
+                  <td>
+                    <button (click)="onEdit(c, editar)" style="margin-right: 5px; margin-top: 15%;" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</button>
+                    <button (click)="delete(c.id)" style="margin-top: 15%;" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Deletar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+      </div>
+    </div>
+  
+  </section>
+  <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<ng-template #editar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Categoria {{editCategories.name}}  </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide(); form.reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="edit()">
+      
+        <div class="form-group has-feedback">
+          <label>Nome:</label>
+          <input 
+          type="text" 
+          class="form-control"
+          [value]="editCategories.name"
+          placeholder="Digite seu nome"
+          formControlName="name"
+          >
+    
+          <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
+          class="alert alert-danger"
+          >
+            <div *ngIf="form.get('name').hasError('required')">
+              campo é Requerido
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group has-feedback">
+          <label>Photo:</label>
+          <input 
+          type="file" 
+          class="form-control" 
+          (change)="onFileChanges($event.target.files)"
+          accept="image/*"
+          formControlName="photo"
+          >
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); form.reset()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid" >Save changes</button>
+        </div>
+      </form>
+  </div>
+</ng-template>
+
+<ng-template #modal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Cadastre Nova Categoria</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide(); form.reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="add()">
+      
+        <div class="form-group has-feedback">
+          <label>Nome:</label>
+          <input 
+          type="text" 
+          class="form-control"
+          placeholder="Digite seu nome"
+          formControlName="name"
+          >
+    
+          <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
+          class="alert alert-danger"
+          >
+            <div *ngIf="form.get('name').hasError('required')">
+              campo é Requerido
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group has-feedback">
+          <label>Photo:</label>
+          <input 
+          type="file" 
+          class="form-control" 
+          (change)="onFileChanges($event.target.files)"
+          accept="image/*"
+          formControlName="photo"
+          >
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef.hide(); form.reset()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid" >Save changes</button>
+        </div>
+      </form>
+  </div>
+</ng-template>
+<ngx-spinner
+  bdColor = "rgba(51, 51, 51, 0.8)"
+  size = "large"
+  color = "#fff"
+  type = "pacman"
+></ngx-spinner>
+  

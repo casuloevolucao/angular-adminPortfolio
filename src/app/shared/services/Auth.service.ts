@@ -22,7 +22,7 @@ export class Auth{
         .then(()=>{
             this.Auth.auth.currentUser.updateProfile({
                 displayName: usuario.name,
-                photoURL: usuario.imagem
+                photoURL: usuario.photo
             })
         })
         

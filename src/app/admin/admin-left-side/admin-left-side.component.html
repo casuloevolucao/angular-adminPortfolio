@@ -56,14 +56,28 @@
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-          </a>
-
+          </a>      
+         
         <ul class="treeview-menu">
+            <!--<li routerLinkActive="active"><a routerLink="/admin/page-home">
+              <i class="fa fa-home"></i>
+              Home page</a></li>-->
 
-          <li routerLinkActive="active"><a routerLink="/admin/page-portfolio">
-            <i class="fa fa-address-card"></i>
-            Portfólio Page</a></li>
-
+          <li routerLinkActive="active" class="treeview">
+              <a href="#"><i class="fa fa-address-card"></i> <span>Portfólio Page</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+            <ul class="treeview-menu">
+                <li routerLinkActive="active"><a routerLink="/admin/page-portfolio">
+                  <i class="fa fa-comments"></i>
+                  Postagens</a></li>
+                <li routerLinkActive="active"><a routerLink="/admin/page-categories-portfolio">
+                  <i class="fa fa-th-list"></i>
+                  Categoira Postagens</a></li>
+            </ul>
+          </li>
           <li routerLinkActive="active"><a routerLink="/admin/page-team">
             <i class="fa fa-users"></i>
             Team page</a></li>

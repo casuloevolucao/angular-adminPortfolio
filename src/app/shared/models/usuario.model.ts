@@ -7,5 +7,5 @@ export class Usuario{
 
         public senha:string
 
-        public imagem:string
+        public photo:string
 }

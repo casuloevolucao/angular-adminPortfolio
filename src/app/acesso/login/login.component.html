@@ -1,3 +1,4 @@
+<div class="container bg">
 <div class="login-box">
 <div class="login-logo">
     <img src='/assets/img/logo.png'>
@@ -59,7 +60,7 @@
     <div class="row">
       <!-- /.col -->
       <div class="col-md-6">
-        <button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
+        <button type="submit" [disabled]="!formulario.valid" class="btn btn-primary btn-block btn-flat">Logar</button>
       </div>
       <!-- /.col -->
       <div class="col-md-6">
@@ -75,3 +76,4 @@
 <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->            
+</div>

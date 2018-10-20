@@ -78,3 +78,7 @@
       opacity: 1;
     }
   }
+
+  .swal2-container {
+    zoom: 1.7;
+  }

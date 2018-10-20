@@ -8,6 +8,7 @@ import { ROUTER } from './app.routes';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 //ngx bootstrap
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -31,7 +32,6 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { AdminFooterComponent } from './admin/admin-footer/admin-footer.component';
 import { AdminControlSidebarComponent } from './admin/admin-control-sidebar/admin-control-sidebar.component';
 import { AdminLeftSideComponent } from './admin/admin-left-side/admin-left-side.component';
-import { AcessoComponent } from './acesso/acesso.component';
 import { LoginComponent } from './acesso/login/login.component';
 import { ResetPasswordComponent } from './acesso/reset-password/reset-password.component';
 import { AdminIndexComponent } from './admin/routes/admin-index/admin-index.component';
@@ -39,10 +39,11 @@ import { AdminUsuariosComponent } from './admin/routes/admin-usuarios/admin-usua
 import { AdminNovoUsuarioComponent } from './admin/routes/admin-novo-usuario/admin-novo-usuario.component';
 import { AdminEditarUsuarioComponent } from './admin/routes/admin-editar-usuario/admin-editar-usuario.component';
 import { AdminPerfilComponent } from './admin/routes/admin-perfil/admin-perfil.component';
-import { AdminPagesComponent } from './admin/routes/admin-pages/admin-pages.component';
-import { AdminPageTeamComponent } from './admin/routes/admin-page-team/admin-page-team.component';
-import { AdminPagePortfolioComponent } from './admin/routes/admin-page-portfolio/admin-page-portfolio.component';
-import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-page-about.component';
+import { AdminPageTeamComponent } from './admin/routes/pages/admin-page-team/admin-page-team.component';
+import { AdminPagePortfolioComponent } from './admin/routes/pages/admin-page-portfolio/admin-page-portfolio.component';
+import { AdminPageAboutComponent } from './admin/routes/pages/admin-page-about/admin-page-about.component';
+import { AdminPageCategoriesPortfolioComponent } from './admin/routes/pages/admin-page-categories-portfolio/admin-page-categories-portfolio.component';
+import { AdminPageHomeComponent } from './admin/routes/pages/admin-page-home/admin-page-home.component';
 
 
 
@@ -54,7 +55,6 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
     AdminFooterComponent,
     AdminControlSidebarComponent,
     AdminLeftSideComponent,
-    AcessoComponent,
     LoginComponent,
     ResetPasswordComponent,
     AdminIndexComponent,
@@ -62,10 +62,11 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
     AdminNovoUsuarioComponent,
     AdminEditarUsuarioComponent,
     AdminPerfilComponent,
-    AdminPagesComponent,
     AdminPageTeamComponent,
     AdminPagePortfolioComponent,
     AdminPageAboutComponent,
+    AdminPageCategoriesPortfolioComponent,
+    AdminPageHomeComponent,
 
   ],
   imports: [
@@ -80,8 +81,8 @@ import { AdminPageAboutComponent } from './admin/routes/admin-page-about/admin-p
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    SweetAlert2Module.forRoot()
-
+    SweetAlert2Module.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [Auth, authGuard, Db],
   bootstrap: [AppComponent]
